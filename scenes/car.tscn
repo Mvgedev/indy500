@@ -138,6 +138,32 @@ frame_progress = 0.03433815
 visible = false
 polygon = PackedVector2Array(-6, -8, 6, -8, 6, -7, 7, -7, 7, -3, 6, -3, 6, -2, 3, -2, 3, 0, 4, 0, 4, 2, 6, 2, 6, 3, 7, 3, 7, 7, 6, 7, 6, 8, -6, 8, -6, 7, -7, 7, -7, 3, -6, 3, -6, 2, -4, 2, -4, 0, -3, 0, -3, -2, -6, -2, -6, -3, -7, -3, -7, -7, -6, -7)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="Pathing Raycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -11)
 collision_mask = 3
+
+[node name="Wheels RC" type="Node2D" parent="."]
+
+[node name="UpLeftWheelRC" type="RayCast2D" parent="Wheels RC"]
+position = Vector2(-3, -5)
+target_position = Vector2(-3, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="DownLeftWheelRC" type="RayCast2D" parent="Wheels RC"]
+position = Vector2(-3, 5)
+target_position = Vector2(-3, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="UpRightWheelRC" type="RayCast2D" parent="Wheels RC"]
+position = Vector2(3, -5)
+target_position = Vector2(3, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="DownRightWheelRC" type="RayCast2D" parent="Wheels RC"]
+position = Vector2(3, 5)
+target_position = Vector2(3, 0)
+collision_mask = 4
+hit_from_inside = true
