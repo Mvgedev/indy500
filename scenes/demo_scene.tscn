@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://c3ntse86wdaj4"]
 
 [ext_resource type="TileSet" uid="uid://hvtedikgnyso" path="res://assets/resources/track_tiles.tres" id="1_03k34"]
-[ext_resource type="PackedScene" uid="uid://d0udreaal1bst" path="res://scenes/player.tscn" id="2_ba4t3"]
+[ext_resource type="PackedScene" uid="uid://d0udreaal1bst" path="res://scenes/car.tscn" id="2_ba4t3"]
 
 [node name="Demo Scene" type="Node2D"]
 
