@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bu7ridg2861qi"]
+
+[ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="1_5ei7o"]
+[ext_resource type="Texture2D" uid="uid://bocuytn4fxa2b" path="res://assets/sprites/UI/UI_Button_Normal.png" id="1_gqp5d"]
+[ext_resource type="Texture2D" uid="uid://dhs7xu4doaggo" path="res://assets/sprites/UI/UI_Button_Pressed.png" id="2_5ei7o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0nm1"]
+texture = ExtResource("1_gqp5d")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bduws"]
+texture = ExtResource("2_5ei7o")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fojpf"]
+texture = ExtResource("1_gqp5d")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+modulate_color = Color(1.1638972, 1.1638972, 1.1638972, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ei7o"]
+
+[node name="Button" type="Button"]
+offset_right = 6.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_5ei7o")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_q0nm1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bduws")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fojpf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ei7o")
+text = "Test Text"

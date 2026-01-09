@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcryhv7e0x5pq"]
+
+[ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="1_sevv3"]
+[ext_resource type="Script" uid="uid://tcoq5o86dggw" path="res://scenes/GUI/action_bind.gd" id="1_uwfq5"]
+
+[node name="Action" type="HBoxContainer"]
+script = ExtResource("1_uwfq5")
+
+[node name="Action_Key" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_sevv3")
+theme_override_font_sizes/font_size = 16
+text = "Action"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Space" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Event_Key" type="Button" parent="."]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_sevv3")
+text = "Current Input"
+alignment = 0
+clip_text = true
