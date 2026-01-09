@@ -125,6 +125,24 @@ func _physics_process(delta: float) -> void:
 	lat_speed = velocity.dot(right)
 	# Animation
 	handle_pace(cur_speed)
+	# Wraping
+	edge_wrap()
+
+func edge_wrap():
+	var h = get_viewport_rect().size.y
+	var w = get_viewport_rect().size.x
+	var margin = 8.0
+	
+	# Handle Vert
+	if global_position.y < -margin:
+		global_position.y += h + (margin * 2)
+	elif global_position.y > h + margin:
+		global_position.y -= h + (margin * 2)
+	
+	if global_position.x < -margin:
+		global_position.x += w + (margin * 2)
+	elif global_position.x > w + margin:
+		global_position.x -= w + (margin * 2)
 
 func terrain_modifier(road_ratio):
 	match ground_terrain:
@@ -142,8 +160,6 @@ func terrain_modifier(road_ratio):
 			pass
 		TERRAIN.GRASS:
 			pass
-	
-	
 
 func steering_management(steering, speed_ratio) -> float:
 	if steering == 0.0:
