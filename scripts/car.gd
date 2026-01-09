@@ -11,7 +11,7 @@ extends CharacterBody2D
 @onready var up_right_wheel_rc: RayCast2D = $"Wheels RC/UpRightWheelRC"
 @onready var down_right_wheel_rc: RayCast2D = $"Wheels RC/DownRightWheelRC"
 
-
+@export var car_margin = 8.0
 
 var h_brake = false
 # TRACK VALUE
@@ -131,18 +131,17 @@ func _physics_process(delta: float) -> void:
 func edge_wrap():
 	var h = get_viewport_rect().size.y
 	var w = get_viewport_rect().size.x
-	var margin = 8.0
 	
-	# Handle Vert
-	if global_position.y < -margin:
-		global_position.y += h + (margin * 2)
-	elif global_position.y > h + margin:
-		global_position.y -= h + (margin * 2)
-	
-	if global_position.x < -margin:
-		global_position.x += w + (margin * 2)
-	elif global_position.x > w + margin:
-		global_position.x -= w + (margin * 2)
+	# Handle Vertical
+	if global_position.y < -car_margin:
+		global_position.y += h + (car_margin * 2)
+	elif global_position.y > h + car_margin:
+		global_position.y -= h + (car_margin * 2)
+	# Handle Horizontal
+	if global_position.x < -car_margin:
+		global_position.x += w + (car_margin * 2)
+	elif global_position.x > w + car_margin:
+		global_position.x -= w + (car_margin * 2)
 
 func terrain_modifier(road_ratio):
 	match ground_terrain:
