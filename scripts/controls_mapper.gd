@@ -110,7 +110,7 @@ func _input(event: InputEvent) -> void:
 			return
 		InputSystem.save_inputs()
 		refresh_content(binds[selected_actionbind])
-		waiting_for_input = false
 		selected_actionbind = -1
 		animation_player.play("RESET")
-		
+		await get_tree().create_timer(0.3).timeout # Avoid looping on saving the SPACE binding
+		waiting_for_input = false

@@ -3,7 +3,17 @@ extends Node
 # Config File Const
 const INPUT_CFG_PATH = "user://input.cfg"
 const INPUT_SECTION_KEY = "input"
-
+## Management of cfg file format
+const INPUT_EVENT_TYPE = "event_type"
+const INPUT_TYPE_KEY = "keyboard"
+const INPUT_TYPE_JOYPAD = "joypad_button"
+const INPUT_TYPE_JOYSTICK = "joypad_axis"
+const INPUT_TYPE_MOUSE = "mouse_button"
+const INPUT_KEYCODE = "keycode"
+const INPUT_P_KEYCODE = "physical_keycode"
+const INPUT_BUTTON_IDX = "button_index"
+const INPUT_AXIS = "axis"
+const INPUT_AXIS_VALUE = "axis_value"
 # Inputs Consts
 const DEADZONE = 0.2
 ## Inputs P1
@@ -36,15 +46,26 @@ func save_inputs():
 	for action in InputMap.get_actions():
 		var events = InputMap.action_get_events(action)
 		for ev in events:
+			var ev_val
 			if ev is InputEventKey:
-				cfg.set_value(INPUT_SECTION_KEY, action, ev.keycode)
+				ev_val = {INPUT_EVENT_TYPE:INPUT_TYPE_KEY, INPUT_KEYCODE:ev.keycode, INPUT_P_KEYCODE:ev.physical_keycode}
+			elif ev is InputEventJoypadButton:
+				ev_val = {INPUT_EVENT_TYPE:INPUT_TYPE_JOYPAD, INPUT_BUTTON_IDX:ev.button_index}
+			elif ev is InputEventJoypadMotion:
+				ev_val = {INPUT_EVENT_TYPE:INPUT_TYPE_JOYSTICK, INPUT_AXIS:ev.axis, INPUT_AXIS_VALUE:ev.axis_value}
+			elif ev is InputEventMouse:
+				ev_val = {INPUT_EVENT_TYPE:INPUT_TYPE_MOUSE, INPUT_BUTTON_IDX:ev.button_index}
+			else:
+				continue
+			cfg.set_value(INPUT_SECTION_KEY, action, ev_val)
 	cfg.save(INPUT_CFG_PATH)
 
 func load_inputs():
 	var cfg = ConfigFile.new()
 	if cfg.load(INPUT_CFG_PATH) == OK:
 		for action in cfg.get_section_keys(INPUT_SECTION_KEY):
-			set_input_for_key(action, cfg.get_value(INPUT_SECTION_KEY, action))
+			var loaded_cfg = load_input_from_cfg(cfg.get_value(INPUT_SECTION_KEY, action))
+			set_input_for_key(action, loaded_cfg)
 	else:
 		for action in InputMap.get_actions():
 			var data = ProjectSettings.get_setting("input/%s" % action)
@@ -86,6 +107,28 @@ func str_joypad_input(val) -> String:
 		JOY_AXIS_RIGHT_Y: ret = "Right Stick Y"
 		JOY_AXIS_TRIGGER_LEFT: ret = "Left Trigger"
 		JOY_AXIS_TRIGGER_RIGHT: ret = "Right Trigger"
+	return ret
+
+func load_input_from_cfg(cfg) -> InputEvent:
+	var ret : InputEvent = null
+	var event_type = cfg[INPUT_EVENT_TYPE]
+	if event_type == INPUT_TYPE_KEY:
+		ret = InputEventKey.new()
+		ret.keycode = cfg[INPUT_KEYCODE]
+		ret.physical_keycode = cfg[INPUT_P_KEYCODE]
+		ret.pressed = false
+	elif event_type == INPUT_TYPE_JOYPAD:
+		ret = InputEventJoypadButton.new()
+		ret.button_index = cfg[INPUT_BUTTON_IDX]
+		ret.pressed = false
+	elif event_type == INPUT_TYPE_JOYSTICK:
+		ret = InputEventJoypadMotion.new()
+		ret.axis = cfg[INPUT_AXIS]
+		ret.axis_value = cfg[INPUT_AXIS_VALUE]
+	elif event_type == INPUT_TYPE_MOUSE:
+		ret = InputEventMouseButton.new()
+		ret.button_index = cfg[INPUT_BUTTON_IDX]
+		ret.pressed = false
 	return ret
 
 func set_input_for_key(key: String, input: InputEvent):
