@@ -7,22 +7,24 @@
 script = ExtResource("1_uwfq5")
 
 [node name="Action_Key" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_sevv3")
 theme_override_font_sizes/font_size = 16
 text = "Action"
 clip_text = true
-text_overrun_behavior = 3
+text_overrun_behavior = 1
 
 [node name="Space" type="Control" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Event_Key" type="Button" parent="."]
-custom_minimum_size = Vector2(90, 0)
+custom_minimum_size = Vector2(105, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_sevv3")
 text = "Current Input"
 alignment = 0
 clip_text = true
+
+[connection signal="pressed" from="Event_Key" to="." method="_on_event_key_pressed"]
