@@ -8,7 +8,6 @@ var mapper : ControlMapper = null
 var id := 0
 
 func _ready() -> void:
-	print("Yay")
 	if mapper:
 		mapper.refresh_content(self)
 

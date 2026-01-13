@@ -28,6 +28,7 @@ class_name ControlMapper
 var waiting_for_input = false
 var selected_actionbind = -1
 var input_map := []
+var binds := []
 
 func _ready() -> void:
 	fill_input_map()
@@ -63,12 +64,14 @@ func fill_input_map():
 	input_map.append({InputSystem.P1_THROTTLE_KEY: InputSystem.get_input_for_key(InputSystem.P1_THROTTLE_KEY)})
 	input_map.append({InputSystem.P1_BRAKE_KEY: InputSystem.get_input_for_key(InputSystem.P1_BRAKE_KEY)})
 	input_map.append({InputSystem.P1_HANDBRAKE_KEY: InputSystem.get_input_for_key(InputSystem.P1_HANDBRAKE_KEY)})
+	binds.append_array([p_1_steer_left, p_1_steer_right, p_1_throttle, p_1_brake, p_1_h_brake])
 	#P2 Input
 	input_map.append({InputSystem.P2_LSTEER_KEY: InputSystem.get_input_for_key(InputSystem.P2_LSTEER_KEY)})
 	input_map.append({InputSystem.P2_RSTEER_KEY: InputSystem.get_input_for_key(InputSystem.P2_RSTEER_KEY)})
 	input_map.append({InputSystem.P2_THROTTLE_KEY: InputSystem.get_input_for_key(InputSystem.P2_THROTTLE_KEY)})
 	input_map.append({InputSystem.P2_BRAKE_KEY: InputSystem.get_input_for_key(InputSystem.P2_BRAKE_KEY)})
 	input_map.append({InputSystem.P2_HANDBRAKE_KEY: InputSystem.get_input_for_key(InputSystem.P2_HANDBRAKE_KEY)})
+	binds.append_array([p_2_steer_left, p_2_steer_right, p_2_throttle, p_2_brake, p_2_h_brake])
 	# UI Input
 	input_map.append({InputSystem.UI_LEFT_KEY: InputSystem.get_input_for_key(InputSystem.UI_LEFT_KEY)})
 	input_map.append({InputSystem.UI_RIGHT_KEY: InputSystem.get_input_for_key(InputSystem.UI_RIGHT_KEY)})
@@ -76,6 +79,7 @@ func fill_input_map():
 	input_map.append({InputSystem.UI_DOWN_KEY: InputSystem.get_input_for_key(InputSystem.UI_DOWN_KEY)})
 	input_map.append({InputSystem.UI_ACCEPT_KEY: InputSystem.get_input_for_key(InputSystem.UI_ACCEPT_KEY)})
 	input_map.append({InputSystem.UI_CANCEL_KEY: InputSystem.get_input_for_key(InputSystem.UI_CANCEL_KEY)})
+	binds.append_array([ui_left, ui_right, ui_up, ui_down, ui_confirm, ui_cancel])
 
 func refresh_content(bind : ActionBind) -> void:
 	var action = input_map[bind.id]
@@ -83,16 +87,30 @@ func refresh_content(bind : ActionBind) -> void:
 		bind.update_action(action.keys()[0], action.values()[0])
 
 func action_bind_pressed(id):
-	selected_actionbind = id
-	waiting_for_input = true
-	animation_player.play("waiting_for_input")
-	# Display small popup
-	
+	if waiting_for_input == false:
+		selected_actionbind = id
+		waiting_for_input = true
+		animation_player.play("waiting_for_input")
+
 # Waiting for remap
 func _input(event: InputEvent) -> void:
-	if waiting_for_input and event is InputEventKey and event.pressed:
-		
+	if waiting_for_input and event:
+		var key = input_map[selected_actionbind].keys()[0]
+		# Keyboard
+		if event is InputEventKey and event.pressed:
+			InputSystem.set_input_for_key(key, event)
+			input_map[selected_actionbind][key] = InputSystem.get_input_for_key(key)
+		elif event is InputEventJoypadButton and event.pressed:
+			pass
+		elif event is InputEventJoypadMotion and abs(event.axis_value) > InputSystem.DEADZONE:
+			pass
+		elif event is InputEventMouseButton and event.pressed:
+			pass
+		else:
+			return
+		InputSystem.save_inputs()
+		refresh_content(binds[selected_actionbind])
 		waiting_for_input = false
 		selected_actionbind = -1
 		animation_player.play("RESET")
-		pass
+		

@@ -5,6 +5,7 @@ const INPUT_CFG_PATH = "user://input.cfg"
 const INPUT_SECTION_KEY = "input"
 
 # Inputs Consts
+const DEADZONE = 0.2
 ## Inputs P1
 const P1_LSTEER_KEY = "steer_left"
 const P1_RSTEER_KEY = "steer_right"
@@ -43,14 +44,22 @@ func load_inputs():
 	var cfg = ConfigFile.new()
 	if cfg.load(INPUT_CFG_PATH) == OK:
 		for action in cfg.get_section_keys(INPUT_SECTION_KEY):
-			remap_action(action, cfg.get_value(INPUT_SECTION_KEY, action))
+			set_input_for_key(action, cfg.get_value(INPUT_SECTION_KEY, action))
+	else:
+		for action in InputMap.get_actions():
+			var data = ProjectSettings.get_setting("input/%s" % action)
+			if data == null:
+				continue
+			if not data.has("events"):
+				continue
+			for e in data["events"]:
+				set_input_for_key(action, e)
+				break
+			
 
 # Setter/Getter for Inputs
 func get_input_for_key(key: String) -> String:
-	var setting_path := "input/%s" % key
-	if not ProjectSettings.has_setting(setting_path):
-		return ""
-	var events = ProjectSettings.get_setting(setting_path)["events"]
+	var events = InputMap.action_get_events(key)
 	for e in events: # Will return the first event only
 		if e is InputEventKey:
 			if e.keycode != Key.KEY_NONE:
@@ -80,14 +89,47 @@ func str_joypad_input(val) -> String:
 	return ret
 
 func set_input_for_key(key: String, input: InputEvent):
-	remap_action(key, input.keycode)
-
-func remap_action(key: String, new_input: Key):
+	# Create new Event
+	var new_event : InputEvent
+	if input is InputEventKey:
+		new_event = remap_action_for_kb(input)
+	elif input is InputEventJoypadButton:
+		new_event = remap_action_for_jb(input.button_index)
+	elif input is InputEventJoypadMotion:
+		new_event = remap_action_for_ja(input.axis, input.axis_value)
+	elif input is InputEventMouseButton:
+		new_event = remap_action_for_mo(input.button_index)
+	else:
+		print("Error rebinding input")
+		return
 	# Clear action from input(s)
 	InputMap.action_erase_events(key)
-	# Create new input based on Key received
-	var event := InputEventKey.new()
-	event.keycode = new_input
-	event.pressed = false
 	# Add input to action
-	InputMap.action_add_event(key, event)
+	InputMap.action_add_event(key, new_event)
+
+func remap_action_for_kb(new_input: InputEventKey) -> InputEventKey:
+	var event := InputEventKey.new()
+	if new_input.keycode != 0:
+		event.keycode = new_input.keycode
+	elif new_input.physical_keycode != 0:
+		event.physical_keycode = new_input.physical_keycode
+	event.pressed = false
+	return event
+
+func remap_action_for_jb(new_input: JoyButton) -> InputEventJoypadButton:
+	var event := InputEventJoypadButton.new()
+	event.button_index = new_input
+	event.pressed = false
+	return event
+
+func remap_action_for_ja(new_input: JoyAxis, value: float) -> InputEventJoypadMotion:
+	var event := InputEventJoypadMotion.new()
+	event.axis = new_input
+	event.axis_value = value
+	return event
+
+func remap_action_for_mo(new_input: MouseButton) -> InputEventMouseButton:
+	var event := InputEventMouseButton.new()
+	event.button_index = new_input
+	event.pressed = false
+	return event
