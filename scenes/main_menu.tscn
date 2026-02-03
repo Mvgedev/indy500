@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://vytfw11i30gg" path="res://scenes/GUI/Collections/menu.tscn" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://b5r5pwvsfcs40" path="res://scenes/GUI/Collections/settings.tscn" id="3_wu84c"]
 [ext_resource type="PackedScene" uid="uid://cmxn88ew6w03q" path="res://scenes/GUI/Collections/controls_mapper.tscn" id="4_8ln24"]
+[ext_resource type="PackedScene" uid="uid://b8411iaxmib13" path="res://scenes/GUI/Collections/game_settings.tscn" id="5_8ln24"]
 
 [node name="Main Menu" type="Node2D" unique_id=1095242400]
 script = ExtResource("1_ekxnf")
@@ -19,4 +20,7 @@ anchor_mode = 0
 visible = false
 
 [node name="Controls Mapper" parent="CanvasLayer" unique_id=1969575475 instance=ExtResource("4_8ln24")]
+visible = false
+
+[node name="Game Settings" parent="CanvasLayer" unique_id=19729054 instance=ExtResource("5_8ln24")]
 visible = false

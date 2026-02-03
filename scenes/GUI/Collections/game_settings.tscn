@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://b8411iaxmib13"]
+
+[ext_resource type="Script" uid="uid://c8kgysdytkvu" path="res://scripts/GUI/game_settings.gd" id="1_bqnmr"]
+[ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="1_irb0g"]
+[ext_resource type="PackedScene" uid="uid://bu7ridg2861qi" path="res://scenes/GUI/button.tscn" id="2_bqnmr"]
+[ext_resource type="Texture2D" uid="uid://ddcyocdbg2ii6" path="res://assets/sprites/UI/Arrow.png" id="3_mwgk2"]
+[ext_resource type="Texture2D" uid="uid://dk0bms8adouf5" path="res://assets/sprites/UI/Arrow_Pressed.png" id="4_mceey"]
+
+[node name="Game Settings" type="Control" unique_id=19729054]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqnmr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=97089776]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Players Number" type="Label" parent="VBoxContainer" unique_id=1075536945]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "PLAYERS"
+horizontal_alignment = 1
+
+[node name="Players Toggle" type="HBoxContainer" parent="VBoxContainer" unique_id=2043672257]
+layout_mode = 2
+
+[node name="MarginL" type="Control" parent="VBoxContainer/Players Toggle" unique_id=1204014962]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="One" type="Label" parent="VBoxContainer/Players Toggle" unique_id=1587179268]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "ONE"
+
+[node name="PlayerToggle" type="CheckButton" parent="VBoxContainer/Players Toggle" unique_id=691357479]
+layout_mode = 2
+
+[node name="Two" type="Label" parent="VBoxContainer/Players Toggle" unique_id=1721829091]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "TWO"
+
+[node name="MarginR" type="Control" parent="VBoxContainer/Players Toggle" unique_id=129194332]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Game Mode" type="Label" parent="VBoxContainer" unique_id=1597032011]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "GAME MODE"
+horizontal_alignment = 1
+
+[node name="Modes" type="HBoxContainer" parent="VBoxContainer" unique_id=183622158]
+layout_mode = 2
+
+[node name="PrevMode" type="TextureButton" parent="VBoxContainer/Modes" unique_id=1366529164]
+layout_mode = 2
+texture_normal = ExtResource("3_mwgk2")
+texture_pressed = ExtResource("4_mceey")
+
+[node name="GameModeLabel" type="Label" parent="VBoxContainer/Modes" unique_id=2139545451]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "RACE"
+horizontal_alignment = 1
+
+[node name="NextMode" type="TextureButton" parent="VBoxContainer/Modes" unique_id=1398676867]
+layout_mode = 2
+texture_normal = ExtResource("3_mwgk2")
+texture_pressed = ExtResource("4_mceey")
+flip_h = true
+
+[node name="Circuit" type="Label" parent="VBoxContainer" unique_id=1895551013]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("1_irb0g")
+text = "TRACK"
+horizontal_alignment = 1
+
+[node name="Launch Game" type="HBoxContainer" parent="VBoxContainer" unique_id=857608763]
+layout_mode = 2
+
+[node name="MarginL" type="Control" parent="VBoxContainer/Launch Game" unique_id=2012833100]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Start" parent="VBoxContainer/Launch Game" unique_id=1067905979 instance=ExtResource("2_bqnmr")]
+layout_mode = 2
+text = "START GAME"
+
+[node name="MarginR" type="Control" parent="VBoxContainer/Launch Game" unique_id=1439464557]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back" type="HBoxContainer" parent="VBoxContainer" unique_id=1386738549]
+layout_mode = 2
+
+[node name="MarginL" type="Control" parent="VBoxContainer/Back" unique_id=1863303495]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back Button" parent="VBoxContainer/Back" unique_id=1708761143 instance=ExtResource("2_bqnmr")]
+layout_mode = 2
+text = "BACK"
+
+[node name="MarginR" type="Control" parent="VBoxContainer/Back" unique_id=844432824]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/Players Toggle/PlayerToggle" to="." method="_on_player_toggle_pressed"]
+[connection signal="pressed" from="VBoxContainer/Modes/PrevMode" to="." method="_on_prev_mode_pressed"]
+[connection signal="pressed" from="VBoxContainer/Modes/NextMode" to="." method="_on_next_mode_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back/Back Button" to="." method="_on_back_button_pressed"]

@@ -34,4 +34,5 @@ text = "PLAY"
 layout_mode = 2
 text = "SETTINGS"
 
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
