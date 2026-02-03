@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bjfvbeg8vygsv" path="res://assets/sprites/Car.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://tp7xrew1jtpg" path="res://scripts/Entities/car.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dyrwx0hhuakm2" path="res://scripts/Entities/input_controller.gd" id="3_50v30"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("1_3vyb7")
@@ -116,54 +117,57 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Car" type="CharacterBody2D"]
+[node name="Car" type="CharacterBody2D" unique_id=97673024]
 z_index = 2
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_g2els")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1414992331]
 modulate = Color(0, 0, 0, 0.39215687)
 texture = ExtResource("1_3vyb7")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Car Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Car Sprite" type="AnimatedSprite2D" parent="." unique_id=1753011802]
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"forward"
 autoplay = "idle"
 frame_progress = 0.03433815
 
-[node name="Collision" type="CollisionPolygon2D" parent="."]
+[node name="Collision" type="CollisionPolygon2D" parent="." unique_id=610705888]
 visible = false
 polygon = PackedVector2Array(-6, -8, 6, -8, 6, -7, 7, -7, 7, -3, 6, -3, 6, -2, 3, -2, 3, 0, 4, 0, 4, 2, 6, 2, 6, 3, 7, 3, 7, 7, 6, 7, 6, 8, -6, 8, -6, 7, -7, 7, -7, 3, -6, 3, -6, 2, -4, 2, -4, 0, -3, 0, -3, -2, -6, -2, -6, -3, -7, -3, -7, -7, -6, -7)
 
-[node name="Pathing Raycast" type="RayCast2D" parent="."]
+[node name="Pathing Raycast" type="RayCast2D" parent="." unique_id=1919228777]
 target_position = Vector2(0, -11)
 collision_mask = 3
 
-[node name="Wheels RC" type="Node2D" parent="."]
+[node name="Wheels RC" type="Node2D" parent="." unique_id=546145953]
 
-[node name="UpLeftWheelRC" type="RayCast2D" parent="Wheels RC"]
+[node name="UpLeftWheelRC" type="RayCast2D" parent="Wheels RC" unique_id=2093699070]
 position = Vector2(-3, -5)
 target_position = Vector2(-3, 0)
 collision_mask = 4
 hit_from_inside = true
 
-[node name="DownLeftWheelRC" type="RayCast2D" parent="Wheels RC"]
+[node name="DownLeftWheelRC" type="RayCast2D" parent="Wheels RC" unique_id=1387917792]
 position = Vector2(-3, 5)
 target_position = Vector2(-3, 0)
 collision_mask = 4
 hit_from_inside = true
 
-[node name="UpRightWheelRC" type="RayCast2D" parent="Wheels RC"]
+[node name="UpRightWheelRC" type="RayCast2D" parent="Wheels RC" unique_id=1421821409]
 position = Vector2(3, -5)
 target_position = Vector2(3, 0)
 collision_mask = 4
 hit_from_inside = true
 
-[node name="DownRightWheelRC" type="RayCast2D" parent="Wheels RC"]
+[node name="DownRightWheelRC" type="RayCast2D" parent="Wheels RC" unique_id=917174179]
 position = Vector2(3, 5)
 target_position = Vector2(3, 0)
 collision_mask = 4
 hit_from_inside = true
+
+[node name="InputController" type="Node" parent="." unique_id=455821025]
+script = ExtResource("3_50v30")

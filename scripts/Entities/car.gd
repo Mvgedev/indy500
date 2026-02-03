@@ -11,6 +11,15 @@ extends CharacterBody2D
 @onready var up_right_wheel_rc: RayCast2D = $"Wheels RC/UpRightWheelRC"
 @onready var down_right_wheel_rc: RayCast2D = $"Wheels RC/DownRightWheelRC"
 
+# Controls
+@onready var input_controller: Node = $InputController
+
+@export var player : InputController.PLAYER :
+	set(value):
+		player = value
+		if is_instance_valid(input_controller):
+			input_controller.player = value
+
 @export var car_margin = 8.0
 
 var h_brake = false
@@ -64,18 +73,19 @@ var on_road = true
 
 
 func _ready() -> void:
+	input_controller.player = player
 	pass
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("hand_brake"):
+	if event.is_action_pressed(input_controller.get_hbrake_input()):
 		h_brake = true
-	elif event.is_action_released("hand_brake"):
+	elif event.is_action_released(input_controller.get_hbrake_input()):
 		h_brake = false
 	pass
 	
 func _physics_process(delta: float) -> void:
-	var throttle = Input.get_axis("brake","throttle")
-	var steering = Input.get_axis("steer_left","steer_right")
+	var throttle = Input.get_axis(input_controller.get_brake_input(),input_controller.get_throttle_input())
+	var steering = Input.get_axis(input_controller.get_steeringL_input(),input_controller.get_steeringR_input())
 	
 	var road_ratio = get_road_contact_ratio()
 	terrain_modifier(road_ratio)
