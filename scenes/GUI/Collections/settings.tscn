@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://b5r5pwvsfcs40"]
+
+[ext_resource type="PackedScene" uid="uid://bu7ridg2861qi" path="res://scenes/GUI/button.tscn" id="1_cohdu"]
+[ext_resource type="Script" uid="uid://m3a5lsmkq83x" path="res://scripts/GUI/settings.gd" id="1_yjyoo"]
+[ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="2_gyaop"]
+
+[node name="Settings" type="Control" unique_id=183172275]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjyoo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1436828763]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Input Mapping" parent="VBoxContainer" unique_id=807152082 instance=ExtResource("1_cohdu")]
+layout_mode = 2
+text = "Inputs Mapping"
+
+[node name="Sound Slider" type="HBoxContainer" parent="VBoxContainer" unique_id=2108217096]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Sound Slider" unique_id=640262418]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gyaop")
+text = "Sound"
+
+[node name="FXSlider" type="HSlider" parent="VBoxContainer/Sound Slider" unique_id=371093343]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Music Slider" type="HBoxContainer" parent="VBoxContainer" unique_id=1342161657]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Music Slider" unique_id=767907430]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gyaop")
+text = "Music"
+
+[node name="BGMSlider" type="HSlider" parent="VBoxContainer/Music Slider" unique_id=1569868285]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back" type="HBoxContainer" parent="VBoxContainer" unique_id=877062565]
+layout_mode = 2
+
+[node name="MarginL" type="Control" parent="VBoxContainer/Back" unique_id=2058119336]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Back Button" parent="VBoxContainer/Back" unique_id=1483571710 instance=ExtResource("1_cohdu")]
+layout_mode = 2
+text = "BACK"
+
+[node name="MarginR" type="Control" parent="VBoxContainer/Back" unique_id=1800123782]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/Input Mapping" to="." method="_on_input_mapping_pressed"]
+[connection signal="drag_ended" from="VBoxContainer/Sound Slider/FXSlider" to="." method="_on_fx_slider_drag_ended"]
+[connection signal="drag_ended" from="VBoxContainer/Music Slider/BGMSlider" to="." method="_on_bgm_slider_drag_ended"]
+[connection signal="pressed" from="VBoxContainer/Back/Back Button" to="." method="_on_back_button_pressed"]

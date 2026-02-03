@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://cmxn88ew6w03q"]
+
+[ext_resource type="Script" uid="uid://bgu30xh53g0u8" path="res://scripts/GUI/controls_mapper.gd" id="1_5658w"]
+[ext_resource type="Texture2D" uid="uid://cmip7lj777t0r" path="res://assets/sprites/UI/BG_Inputs.png" id="2_l7al3"]
+[ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="3_w0fy4"]
+[ext_resource type="PackedScene" uid="uid://bcryhv7e0x5pq" path="res://scenes/GUI/action_bind.tscn" id="4_3j1t8"]
+[ext_resource type="PackedScene" uid="uid://bu7ridg2861qi" path="res://scenes/GUI/button.tscn" id="5_l7al3"]
+[ext_resource type="Texture2D" uid="uid://u7kfl7af8vy7" path="res://assets/sprites/UI/Small popup.png" id="5_r55od"]
+
+[sub_resource type="Animation" id="Animation_lqdkw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Waiting For Input:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Waiting For Input:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Waiting For Input/TextureRect/Waiting Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Waiting for 
+Input..."]
+}
+
+[sub_resource type="Animation" id="Animation_pt43r"]
+resource_name = "waiting_for_input"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Waiting For Input:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Waiting For Input:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Waiting For Input/TextureRect/Waiting Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Waiting for 
+Input...", "Waiting for 
+Input..", "Waiting for 
+Input.", "Waiting for 
+Input", "Waiting for 
+Input.", "Waiting for 
+Input..", "Waiting for 
+Input..."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_310vp"]
+_data = {
+&"RESET": SubResource("Animation_lqdkw"),
+&"waiting_for_input": SubResource("Animation_pt43r")
+}
+
+[node name="Controls Mapper" type="Control" unique_id=1969575475]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5658w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=779441881]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -98.0
+offset_right = 112.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=457946768]
+layout_mode = 2
+texture = ExtResource("2_l7al3")
+stretch_mode = 2
+
+[node name="Container" type="Control" parent="VBoxContainer/TextureRect" unique_id=1797951750]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TextureRect/Container" unique_id=178552691]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CTRLMapping_Label" type="Label" parent="VBoxContainer/TextureRect/Container/VBoxContainer" unique_id=269319027]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_w0fy4")
+theme_override_font_sizes/font_size = 16
+text = "Controls Mapping
+"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TextureRect/Container/VBoxContainer" unique_id=1315247512]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer" unique_id=1969514369]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 3
+
+[node name="ActionsContainer" type="VBoxContainer" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer" unique_id=261899984]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Player 1 Label" type="Label" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1362344928]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_w0fy4")
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="P1 Steer Left" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=139181686 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P1 Steer Right" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=78013272 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P1 Throttle" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=827222788 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P1 Brake" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1085814843 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P1 HBrake" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1671879793 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="Player 2 Label" type="Label" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=236907552]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_w0fy4")
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="P2 Steer Left" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1224818715 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P2 Steer Right" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1804730470 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P2 Throttle" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1760405376 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P2 Brake" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=2110091494 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="P2 HBrake" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1056942099 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="Menu" type="Label" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=2119151536]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_w0fy4")
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="UI Left" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=818282811 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="UI Right" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=2008182990 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="UI Up" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1530260950 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="UI Down" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=1820968610 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="UI Confirm" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=140943823 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="UI Cancel" parent="VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer" unique_id=526100128 instance=ExtResource("4_3j1t8")]
+layout_mode = 2
+
+[node name="Back Button" type="HBoxContainer" parent="VBoxContainer" unique_id=1333839990]
+layout_mode = 2
+
+[node name="Margin" type="Control" parent="VBoxContainer/Back Button" unique_id=1214893970]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="back button" parent="VBoxContainer/Back Button" unique_id=1067506558 instance=ExtResource("5_l7al3")]
+layout_mode = 2
+text = "BACK"
+
+[node name="Margin2" type="Control" parent="VBoxContainer/Back Button" unique_id=1470510742]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Waiting For Input" type="Control" parent="." unique_id=1773541064]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Waiting For Input" unique_id=1024010919]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043137256, 0.043137256, 0.043137256, 0.39215687)
+
+[node name="TextureRect" type="TextureRect" parent="Waiting For Input" unique_id=941518847]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -32.0
+offset_right = 62.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_r55od")
+
+[node name="Waiting Label" type="Label" parent="Waiting For Input/TextureRect" unique_id=401116316]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_w0fy4")
+text = "Waiting for 
+Input..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=417395017]
+libraries/ = SubResource("AnimationLibrary_310vp")
+
+[connection signal="pressed" from="VBoxContainer/Back Button/back button" to="." method="_on_back_button_pressed"]

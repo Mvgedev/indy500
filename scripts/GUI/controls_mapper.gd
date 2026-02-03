@@ -3,24 +3,26 @@ class_name ControlMapper
 
 # ActionBinds
 ## P1
-@onready var p_1_steer_left: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Steer Left"
-@onready var p_1_steer_right: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Steer Right"
-@onready var p_1_throttle: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Throttle"
-@onready var p_1_brake: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Brake"
-@onready var p_1_h_brake: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 HBrake"
+@onready var p_1_steer_left: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Steer Left"
+@onready var p_1_steer_right: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Steer Right"
+@onready var p_1_throttle: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Throttle"
+@onready var p_1_brake: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 Brake"
+@onready var p_1_h_brake: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P1 HBrake"
 ## P2
-@onready var p_2_steer_left: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Steer Left"
-@onready var p_2_steer_right: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Steer Right"
-@onready var p_2_throttle: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Throttle"
-@onready var p_2_brake: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Brake"
-@onready var p_2_h_brake: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 HBrake"
+@onready var p_2_steer_left: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Steer Left"
+@onready var p_2_steer_right: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Steer Right"
+@onready var p_2_throttle: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Throttle"
+@onready var p_2_brake: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 Brake"
+@onready var p_2_h_brake: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/P2 HBrake"
 ## UI
-@onready var ui_left: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Left"
-@onready var ui_right: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Right"
-@onready var ui_up: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Up"
-@onready var ui_down: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Down"
-@onready var ui_confirm: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Confirm"
-@onready var ui_cancel: ActionBind = $"TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Cancel"
+@onready var ui_left: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Left"
+@onready var ui_right: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Right"
+@onready var ui_up: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Up"
+@onready var ui_down: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Down"
+@onready var ui_confirm: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Confirm"
+@onready var ui_cancel: ActionBind = $"VBoxContainer/TextureRect/Container/VBoxContainer/ScrollContainer/MarginContainer/ActionsContainer/UI Cancel"
+
+signal close_input_mapper()
 
 # Waiting for Input Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -114,3 +116,7 @@ func _input(event: InputEvent) -> void:
 		animation_player.play("RESET")
 		await get_tree().create_timer(0.3).timeout # Avoid looping on saving the SPACE binding
 		waiting_for_input = false
+
+
+func _on_back_button_pressed() -> void:
+	emit_signal("close_input_mapper")

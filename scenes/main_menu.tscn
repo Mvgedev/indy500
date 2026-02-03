@@ -1,40 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://e2ca7e1wdt2p"]
+[gd_scene format=3 uid="uid://e2ca7e1wdt2p"]
 
-[ext_resource type="PackedScene" uid="uid://bu7ridg2861qi" path="res://scenes/GUI/button.tscn" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://c4cpql7kewisa" path="res://scripts/Scenes/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://vytfw11i30gg" path="res://scenes/GUI/Collections/menu.tscn" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://b5r5pwvsfcs40" path="res://scenes/GUI/Collections/settings.tscn" id="3_wu84c"]
+[ext_resource type="PackedScene" uid="uid://cmxn88ew6w03q" path="res://scenes/GUI/Collections/controls_mapper.tscn" id="4_8ln24"]
 
-[node name="Main Menu" type="Node2D"]
+[node name="Main Menu" type="Node2D" unique_id=1095242400]
+script = ExtResource("1_ekxnf")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1385186461]
 anchor_mode = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1526797528]
 
-[node name="Full Rect" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Menu" parent="CanvasLayer" unique_id=2142685995 instance=ExtResource("1_l6cm7")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Full Rect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Settings" parent="CanvasLayer" unique_id=183172275 instance=ExtResource("3_wu84c")]
+visible = false
 
-[node name="Play" parent="CanvasLayer/Full Rect/VBoxContainer" instance=ExtResource("1_l6cm7")]
-layout_mode = 2
-text = "PLAY"
-
-[node name="Settings" parent="CanvasLayer/Full Rect/VBoxContainer" instance=ExtResource("1_l6cm7")]
-layout_mode = 2
-text = "SETTINGS"
+[node name="Controls Mapper" parent="CanvasLayer" unique_id=1969575475 instance=ExtResource("4_8ln24")]
+visible = false

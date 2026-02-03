@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://hvtedikgnyso"]
+[gd_resource type="TileSet" format=3 uid="uid://hvtedikgnyso"]
 
 [ext_resource type="Texture2D" uid="uid://cis1e5w8atfl2" path="res://assets/sprites/Track_Tileset3.png" id="1_rohta"]
 

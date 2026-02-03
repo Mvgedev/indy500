@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcryhv7e0x5pq"]
+[gd_scene format=3 uid="uid://bcryhv7e0x5pq"]
 
 [ext_resource type="FontFile" uid="uid://dp61p376mk2jv" path="res://assets/fonts/monogram.ttf" id="1_sevv3"]
-[ext_resource type="Script" uid="uid://tcoq5o86dggw" path="res://scenes/GUI/action_bind.gd" id="1_uwfq5"]
+[ext_resource type="Script" uid="uid://tcoq5o86dggw" path="res://scripts/GUI/action_bind.gd" id="1_uwfq5"]
 
 [node name="Action" type="HBoxContainer"]
 script = ExtResource("1_uwfq5")

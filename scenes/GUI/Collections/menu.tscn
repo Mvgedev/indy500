@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://vytfw11i30gg"]
+
+[ext_resource type="Script" uid="uid://y3t8cu01cp76" path="res://scripts/GUI/menu.gd" id="1_rk0ni"]
+[ext_resource type="PackedScene" uid="uid://bu7ridg2861qi" path="res://scenes/GUI/button.tscn" id="1_th6qs"]
+
+[node name="Menu" type="Control" unique_id=2142685995]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rk0ni")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1189456781]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" parent="VBoxContainer" unique_id=1237508158 instance=ExtResource("1_th6qs")]
+layout_mode = 2
+text = "PLAY"
+
+[node name="Settings" parent="VBoxContainer" unique_id=88192628 instance=ExtResource("1_th6qs")]
+layout_mode = 2
+text = "SETTINGS"
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
