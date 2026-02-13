@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7oqgmweeolgc"
-path="res://.godot/imported/Track_Tile.png-e2ea03640460bedb26169a1d869e6ae3.ctex"
+uid="uid://iikxwkuptee8"
+path="res://.godot/imported/Track_Tiles2.png-98382a0f0cdd0becf0360aabc349c7d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Track_Tile.png"
-dest_files=["res://.godot/imported/Track_Tile.png-e2ea03640460bedb26169a1d869e6ae3.ctex"]
+source_file="res://assets/sprites/Track_Tiles2.png"
+dest_files=["res://.godot/imported/Track_Tiles2.png-98382a0f0cdd0becf0360aabc349c7d5.ctex"]
 
 [params]
 
