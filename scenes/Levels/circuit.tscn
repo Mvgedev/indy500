@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dnrj4n63ymugy"]
+
+[ext_resource type="Script" uid="uid://cujoa8rqdivpl" path="res://scripts/Entities/circuit.gd" id="1_ct501"]
+
+[node name="Circuit" type="Node2D" unique_id=1530415506]
+script = ExtResource("1_ct501")
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=29583656]
+
+[node name="Track" type="TileMapLayer" parent="." unique_id=1805770698]
+
+[node name="Objectives" type="TileMapLayer" parent="." unique_id=160418007]
+
+[node name="Walls" type="TileMapLayer" parent="." unique_id=1867075939]
